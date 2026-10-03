@@ -1,4 +1,4 @@
-# slsguard
+# serverless-log-guard
 
 Função serverless simulada localmente: recebe evento, normaliza, filtra dado
 sensível, aplica retenção e calcula custo estimado.
@@ -27,6 +27,17 @@ sem política guarda o vazamento por tempo indeterminado.
 ## Como rodar
 
 ```powershell
+python -m venv .venv
+.\\.venv\\Scripts\Activate.ps1
+pip install -r requirements.txt
+pip install -e .
+python -m pytest tests/ -v
+python -m slsguard --help
+```
+
+Com o ambiente ativo, o fluxo principal:
+
+```powershell
 python -m slsguard executar dados/eventos-sinteticos.jsonl --politica dados/politica-retencao.yaml
 ```
 
@@ -36,6 +47,12 @@ eventos retidos: 20
 descartados pela retencao: 0
 eventos com PII mascarada: 5
 custo estimado: 0.5200
+```
+
+Rodar sem instalar (útil para conferência rápida):
+
+```powershell
+$env:PYTHONPATH="C:\Users\Kelvin\Desktop\portfolio-24\serverless-log-guard\src"; python -m slsguard executar dados/eventos-sinteticos.jsonl --politica dados/politica-retencao.yaml
 ```
 
 Instalação:
@@ -117,10 +134,50 @@ MIT.
 
 ---
 
-## English
+## EN
+
+### What it is
 
 A locally simulated serverless function: 20 events, 5 planted PII categories,
 retention policy, cost model. Nothing real, no cloud accessed.
+
+### Why it was built
+
+Serverless charges per execution and per storage, and cost control is the
+main risk of the model. But the bigger risk is not in the bill: it is in the
+log. A function that records a CPF in plaintext leaks data on every execution,
+and retention without a policy keeps the leak for an indefinite time.
+
+### How to run
+
+```powershell
+python -m venv .venv
+.\\.venv\\Scripts\Activate.ps1
+pip install -r requirements.txt
+pip install -e .
+python -m pytest tests/ -v
+python -m slsguard --help
+```
+
+Main flow:
+
+```powershell
+python -m slsguard executar dados/eventos-sinteticos.jsonl --politica dados/politica-retencao.yaml
+```
+
+```
+eventos processados: 20
+eventos retidos: 20
+descartados pela retencao: 0
+eventos com PII mascarada: 5
+custo estimado: 0.5200
+```
+
+Run without installing (quick check):
+
+```powershell
+$env:PYTHONPATH="C:\Users\Kelvin\Desktop\portfolio-24\serverless-log-guard\src"; python -m slsguard executar dados/eventos-sinteticos.jsonl --politica dados/politica-retencao.yaml
+```
 
 ### The 5 PII categories
 
@@ -129,15 +186,25 @@ events, zero false positives. Masked by type before retention.
 
 ### Retention
 
-debug 7 days, info 30, erro 90, auditoria 365 and never discarded.
+| Level | Days |
+|---|---|
+| debug | 7 |
+| info | 30 |
+| erro | 90 |
+| auditoria | 365, never discarded |
+
+Audit is evidence, and evidence discarded by routine is destroyed evidence.
 
 ### Cost
 
-20 × 0.02 + 20 × 120 × 0.0001 × 0.5 = **0.52**. Open arithmetic, pinned by test.
+20 × 0.02 + 20 × 120 × 0.0001 × 0.5 = **0.52**. Open arithmetic, pinned by
+test.
 
 ### Tests
 
-33 tests.
+33 tests. They cover the event, the 5 categories, masking, retention at the
+boundaries, the cost against the manual calculation, the handler, and the
+CLI.
 
 ```powershell
 python -m pytest -v
@@ -145,10 +212,28 @@ python tools/verificar_aceite.py
 python tools/verificar_encoding.py
 ```
 
+### What I learned
+
+- **Mask before retaining.** If retention came first, what got stored would
+  contain PII. What stays retained is already clean.
+- **A detector that finds everything and a bit more lies.** Five categories in
+  five events, zero false positive — the other side is tested too.
+- **Audit never expires.** It is not a business rule; it is a consequence of
+  what audit means.
+- **A CLI that reports and still passes teaches you to ignore it.** With PII
+  in the batch, the exit code is 1.
+
 ### Limitations
 
-Regex not NLP; batch parameters not measured; simulated age; no cold start;
-retention decides, doesn't delete.
+- **Regex, not NLP.** PII outside the expected format slips through. It is a
+  detector, not comprehension.
+- **Duration and memory are batch parameters**, not measured. The cost is a
+  model, not a measurement.
+- **Age is simulated.** The CLI takes `--idade`; there is no real clock.
+- **No cold start, transfer, or storage in the cost.** The model covers
+  execution, duration, and memory.
+- **Retention doesn't delete anything.** It decides what would stay; actual
+  deletion would be another system.
 
 ### License
 
