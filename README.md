@@ -52,7 +52,7 @@ custo estimado: 0.5200
 Rodar sem instalar (útil para conferência rápida):
 
 ```powershell
-$env:PYTHONPATH="C:\Users\Kelvin\Desktop\portfolio-24\serverless-log-guard\src"; python -m slsguard executar dados/eventos-sinteticos.jsonl --politica dados/politica-retencao.yaml
+$env:PYTHONPATH="$PWD\src"; python -m slsguard executar dados/eventos-sinteticos.jsonl --politica dados/politica-retencao.yaml
 ```
 
 Instalação:
@@ -176,7 +176,7 @@ custo estimado: 0.5200
 Run without installing (quick check):
 
 ```powershell
-$env:PYTHONPATH="C:\Users\Kelvin\Desktop\portfolio-24\serverless-log-guard\src"; python -m slsguard executar dados/eventos-sinteticos.jsonl --politica dados/politica-retencao.yaml
+$env:PYTHONPATH="$PWD\src"; python -m slsguard executar dados/eventos-sinteticos.jsonl --politica dados/politica-retencao.yaml
 ```
 
 ### The 5 PII categories
