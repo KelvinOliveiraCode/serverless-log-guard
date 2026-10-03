@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Conferir encoding dos arquivos de texto
+        run: python tools/verificar_encoding.py
+
+      - name: Verificar que o pacote importa
+        run: python -c "import slsguard; print('slsguard ok')"
+
+      - name: Rodar testes com cobertura
+        run: python -m pytest --cov=slsguard --cov-report=term-missing --cov-report=xml
+
+      - name: Conferir cobertura minima
+        run: python -m coverage report --fail-under=70
+
+      - name: Prova de aceite
+        run: python tools/verificar_aceite.py
+
+      - name: O exemplo esta atualizado
+        # Gerar via `>` do PowerShell grava UTF-16 com BOM e quebra o diff,
+        # por isso a geracao passa pelo script, com UTF-8 garantido.
+        run: |
+          python tools/gerar_exemplo.py
+          git diff --exit-code -- exemplos/relatorio-custo.txt

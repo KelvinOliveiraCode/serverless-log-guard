@@ -1,0 +1,17 @@
+# Politica de retencao por nivel.
+#
+# Quanto tempo cada nivel de evento fica guardado, em dias. Nivel mais grave
+# fica mais tempo: erro e auditoria sao evidencia, debug e ruido que ocupa
+# disco. Os numeros seguem a especificacao: debug 7, info 30, erro 90,
+# auditoria 365.
+
+retencao:
+  debug: 7
+  info: 30
+  erro: 90
+  auditoria: 365
+
+# Nivel que nunca e descartado automaticamente, mesmo vencido: auditoria e
+# prova, e prova descartada por rotina e prova destruida.
+nunca_descartar:
+  - auditoria

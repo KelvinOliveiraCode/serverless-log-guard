@@ -1,0 +1,5 @@
+eventos processados: 20
+eventos retidos: 20
+descartados pela retencao: 0
+eventos com PII mascarada: 5
+custo estimado: 0.5200

@@ -1,0 +1,6 @@
+﻿# Zero dependencia de execucao alem de PyYAML (politica em YAML).
+PyYAML>=6.0
+
+# Desenvolvimento.
+pytest>=7.4
+pytest-cov>=4.1

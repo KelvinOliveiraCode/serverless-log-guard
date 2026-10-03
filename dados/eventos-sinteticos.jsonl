@@ -1,0 +1,20 @@
+{"id": "evt-013", "tipo": "suporte", "nivel": "info", "mensagem": "retorno de chamada agendado para amanha"}
+{"id": "evt-003", "tipo": "pagamento", "nivel": "info", "mensagem": "cartao 4111-1111-1111-1111 aprovado na operadora de teste"}
+{"id": "evt-018", "tipo": "auditoria", "nivel": "auditoria", "mensagem": "exportacao de relatorio mensal concluida"}
+{"id": "evt-012", "tipo": "monitor", "nivel": "debug", "mensagem": "uso de CPU em 41% no agregador"}
+{"id": "evt-004", "tipo": "cadastro", "nivel": "info", "mensagem": "novo cadastro com CPF 123.456.789-00 validado no formato"}
+{"id": "evt-006", "tipo": "monitor", "nivel": "debug", "mensagem": "latencia p95 em 120ms no ultimo minuto"}
+{"id": "evt-008", "tipo": "login", "nivel": "info", "mensagem": "sessao expirada por inatividade"}
+{"id": "evt-019", "tipo": "suporte", "nivel": "debug", "mensagem": "anexo recebido e encaminhado ao nivel 2"}
+{"id": "evt-015", "tipo": "login", "nivel": "erro", "mensagem": "tres tentativas falhas seguidas do IP 192.168.99.77"}
+{"id": "evt-014", "tipo": "pedido", "nivel": "info", "mensagem": "pedido 1044 separado no deposito"}
+{"id": "evt-007", "tipo": "pedido", "nivel": "erro", "mensagem": "falha ao reservar estoque do pedido 1043"}
+{"id": "evt-010", "tipo": "auditoria", "nivel": "auditoria", "mensagem": "acesso administrativo ao painel de cobranca"}
+{"id": "evt-002", "tipo": "pedido", "nivel": "info", "mensagem": "pedido 1042 criado para entrega"}
+{"id": "evt-009", "tipo": "pagamento", "nivel": "erro", "mensagem": "operadora recusou a transacao, sem motivo detalhado"}
+{"id": "evt-017", "tipo": "monitor", "nivel": "info", "mensagem": "disco em 62% no no de registros"}
+{"id": "evt-016", "tipo": "pagamento", "nivel": "info", "mensagem": "estorno solicitado para o pedido 1042"}
+{"id": "evt-005", "tipo": "suporte", "nivel": "debug", "mensagem": "ticket aberto pelo telefone (11) 90000-0000"}
+{"id": "evt-011", "tipo": "cadastro", "nivel": "info", "mensagem": "endereco atualizado sem documento anexo"}
+{"id": "evt-020", "tipo": "pedido", "nivel": "erro", "mensagem": "timeout no calculo de frete do pedido 1045"}
+{"id": "evt-001", "tipo": "login", "nivel": "info", "mensagem": "usuario cliente.teste@example.invalid entrou no portal"}
