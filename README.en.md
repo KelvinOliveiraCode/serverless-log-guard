@@ -32,7 +32,7 @@ A `slsguard` package with `evento` (load), `pii` (detection+mask), `retencao` (p
 
 ## Repository layout
 
-```
+```text
 serverless-log-guard/
 ├── src/slsguard/    # evento · pii · retencao · custo · handler · cli
 ├── tests/           # 33 tests
@@ -73,4 +73,4 @@ An individual project by Kelvin Oliveira, built with orchestrated AI agents and 
 
 ## License and author
 
-MIT — Copyright (c) 2026 Kelvin Rebelo de Oliveira. Author: [Kelvin Oliveira](https://github.com/KelvinOliveiraCode) · [Portfolio](https://kelvinoliveiracode.github.io/portfolio/)
+MIT. Copyright (c) 2026 Kelvin Rebelo de Oliveira. Author: [Kelvin Oliveira](https://github.com/KelvinOliveiraCode) · [Portfolio](https://kelvinoliveiracode.github.io/portfolio/)
